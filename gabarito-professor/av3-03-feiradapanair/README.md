@@ -1,0 +1,100 @@
+# FeiraDaPanair — Gestão de Feirantes e Produtos Regionais
+
+> **Gabarito de referência da professora (Profa. Priscila Gonçalves).** Não distribuir aos alunos antes da avaliação.
+
+**Curso Técnico em Informática — CETAM** · Linguagem de Programação III (Java / POO) · Avaliação AV3
+
+## 1. Descrição do sistema
+Construir um sistema de gestão de feira que cadastre feirantes, bancas, produtos regionais e registre vendas diárias, gerando o produto mais vendido do dia.
+
+**Contexto:** Feiras livres como a da Panair e a do Manaus Moderna comercializam produtos regionais: açaí, tucumã, farinha, peixes e artesanato indígena. A organização precisa controlar feirantes, bancas e vendas diárias.
+
+### Requisitos funcionais
+1. Cadastrar feirantes e a banca que ocupam.
+2. Cadastrar produtos regionais com categoria (fruta, farinha, pescado, artesanato).
+3. Registrar vendas diárias por produto e por banca.
+4. Calcular o faturamento diário total e por feirante.
+5. Listar o(s) produto(s) mais vendido(s) no período.
+6. Aplicar desconto para clientes que compram acima de determinado valor (regra de negócio).
+
+### Conceitos de POO aplicados
+- Herança em Produto e subclasses regionais
+- Polimorfismo no cálculo de preço/desconto por categoria
+- Encapsulamento do estoque de cada produto
+- Coleções para histórico de vendas (List/Map)
+
+## 2. Equipe
+Profa. Priscila Gonçalves — CETAM, Manaus (Linguagem de Programação III).
+
+## 3. Pré-requisitos
+- JDK 17 ou superior (`java -version` e `javac -version`)
+- Git
+- PostgreSQL 14+ **ou** MySQL 8+ (para a parte de persistência)
+- Driver JDBC (`lib/` ou Maven — ver `lib/README.md`)
+- Opcional: Maven 3.9+
+
+## 4. Estrutura do repositório
+```
+src/main/java/
+├── model/       # entidades de domínio, classes abstratas, interfaces
+├── service/     # regras de negócio
+├── exception/   # exceções customizadas
+├── entity/      # classes que espelham as tabelas (persistência)
+├── dao/         # acesso a dados (CRUD com JDBC)
+├── ConexaoBD.java
+├── TesteCRUD.java
+└── Main.java    # ponto de entrada (menu em modo texto)
+```
+
+```
+sql/        # create_postgresql.sql, create_mysql.sql, insert_dados.sql, testes_select.sql
+scripts/    # compilar / executar / criar banco (.sh e .bat)
+docs/       # descricao-projeto.md, EQUIPE.md, diagramas
+lib/        # drivers JDBC (se não usar Maven)
+```
+
+## 5. Como executar
+
+### 5.1 Aplicação em modo texto (sem banco de dados)
+Linux/macOS:
+```bash
+./scripts/compilar.sh
+./scripts/executar.sh
+```
+Windows:
+```bat
+scripts\compilar.bat
+scripts\executar.bat
+```
+Ou manualmente:
+```bash
+javac -encoding UTF-8 -d out $(find src -name "*.java")
+java -cp out Main
+```
+
+### 5.2 Banco de dados
+PostgreSQL:
+```bash
+./scripts/banco-postgresql.sh      # cria banco, tabelas, dados e testes
+```
+MySQL:
+```bash
+./scripts/banco-mysql.sh
+```
+Depois, em `src/main/java/ConexaoBD.java`, escolha `SGBD_ATIVO` (`POSTGRESQL` ou `MYSQL`) e ajuste usuário/senha.
+
+### 5.3 Teste do CRUD com JDBC
+```bash
+./scripts/executar.sh TesteCRUD
+```
+
+### 5.4 Com Maven
+```bash
+mvn compile
+mvn package
+```
+
+## 6. Situação do projeto
+
+## 7. Apresentação
+Apresentação em **27/07**, com demonstração do sistema em execução e explicação do código por todos os integrantes.

@@ -1,0 +1,26 @@
+# Compilação
+out/
+target/
+bin/
+*.class
+sources.txt
+
+# Drivers JDBC (baixe conforme docs/ ou use o Maven)
+lib/*.jar
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+nbproject/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Credenciais locais (nunca versionar senhas reais)
+*.env
+config.local.properties
